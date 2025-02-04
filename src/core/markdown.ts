@@ -1,4 +1,4 @@
-import { mdContent, mdFrontmatter } from 'jnu-web';
+import { mdContent, mdFrontmatter } from 'jnu-doc';
 import type { Pattern } from '../types';
 
 const makeMarkdown = (url: string, title: string, properties: any, content: string, pattern: Pattern) => {

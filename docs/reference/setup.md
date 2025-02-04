@@ -14,9 +14,9 @@ Ran tool
 
 TypeScript 기반의 Obsidian 플러그인 프로젝트를 설정하기 위해 필요한 파일들을 생성하겠습니다. 먼저 `package.json`을 생성하겠습니다.
 
-```json:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-clipper/package.json
+```json:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-web/package.json
 {
-  "name": "jop-clipper",
+  "name": "jop-web",
   "version": "1.0.0",
   "description": "Obsidian plugin for JOP Clipper",
   "main": "dist/main.js",
@@ -43,7 +43,7 @@ TypeScript 기반의 Obsidian 플러그인 프로젝트를 설정하기 위해 �
 
 이제 TypeScript 설정 파일을 생성하겠습니다:
 
-```json with comments:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-clipper/tsconfig.json
+```json with comments:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-web/tsconfig.json
 {
   "compilerOptions": {
     "baseUrl": "src",
@@ -75,7 +75,7 @@ TypeScript 기반의 Obsidian 플러그인 프로젝트를 설정하기 위해 �
 
 이제 webpack 설정 파일을 생성하겠습니다:
 
-```javascript:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-clipper/webpack.config.js
+```javascript:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-web/webpack.config.js
 const path = require('path');
 
 module.exports = {
@@ -118,9 +118,9 @@ module.exports = {
 
 이제 플러그인의 메인 소스 파일들을 생성하겠습니다. 먼저 `manifest.json`을 생성합니다:
 
-```json:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-clipper/manifest.json
+```json:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-web/manifest.json
 {
-  "id": "jop-clipper",
+  "id": "jop-web",
   "name": "JOP Clipper",
   "version": "1.0.0",
   "minAppVersion": "0.15.0",
@@ -142,7 +142,7 @@ module.exports = {
 
 이제 소스 파일들을 생성하겠습니다. 먼저 `src` 디렉토리를 만들고 메인 파일들을 생성하겠습니다:
 
-```typescript:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-clipper/src/main.ts
+```typescript:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-web/src/main.ts
 import { App, Plugin, PluginSettingTab, Setting } from 'obsidian';
 import './styles.css';
 import { ClipperData } from './data';
@@ -218,7 +218,7 @@ class ClipperSettingTab extends PluginSettingTab {
 
 이제 `data.ts` 파일을 생성하겠습니다:
 
-```typescript:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-clipper/src/data.ts
+```typescript:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-web/src/data.ts
 export class ClipperData {
     private data: any = {};
 
@@ -255,16 +255,16 @@ export class ClipperData {
 
 마지막으로 스타일 파일을 생성하겠습니다:
 
-```css:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-clipper/src/styles.css
-.jop-clipper-icon {
+```css:/C:/JnJ-soft/Projects/@obsidian-plugin/jop-web/src/styles.css
+.jop-web-icon {
     color: var(--text-normal);
 }
 
-.jop-clipper-settings {
+.jop-web-settings {
     padding: 10px;
 }
 
-.jop-clipper-settings input {
+.jop-web-settings input {
     width: 100%;
     padding: 5px;
     margin-bottom: 10px;

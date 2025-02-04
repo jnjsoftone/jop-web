@@ -1,7 +1,8 @@
 // import { requestUrl, TFile, Vault } from 'obsidian';
+import { requestUrl } from 'obsidian';
 import { findPattern } from "../patterns";
 import { sanitizeName } from "jnu-abc";
-import { Cheer } from "jnu-web";
+import { Cheer } from "jnu-doc";
 import { Pattern } from "../types";
 
 const fetchData = async (url: string, pattern: Pattern) => {

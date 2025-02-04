@@ -5,9 +5,9 @@
   "author": "{{author}}",
   "main": "dist/main.js",
   "scripts": {
-    "dev": "webpack --config webpack.config.js --watch && cp -R dist/* /Users/moon/JnJ-soft/Obsidian/liveSync/dev/.obsidian/plugins/jop-clipper/",
-    "build": "webpack --config webpack.config.js --mode production && cp -R dist/* /Users/moon/JnJ-soft/Obsidian/liveSync/dev/.obsidian/plugins/jop-clipper/",
-    "copy-to-vault": "cp -R dist/* /Users/moon/JnJ-soft/Obsidian/liveSync/dev/.obsidian/plugins/jop-clipper/"
+    "dev": "webpack --config webpack.config.js --watch && cp -R dist/* /Users/moon/JnJ-soft/Obsidian/liveSync/dev/.obsidian/plugins/jop-web/",
+    "build": "webpack --config webpack.config.js --mode production && cp -R dist/* /Users/moon/JnJ-soft/Obsidian/liveSync/dev/.obsidian/plugins/jop-web/",
+    "copy-to-vault": "cp -R dist/* /Users/moon/JnJ-soft/Obsidian/liveSync/dev/.obsidian/plugins/jop-web/"
   },
   "keywords": [
     "obsidian",
