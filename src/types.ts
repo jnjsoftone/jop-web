@@ -24,6 +24,7 @@ export type MdContentHook = (url: string, title: string, properties: PropertySet
 export type MdHook = (url: string, title: string, frontmatter: string, content: string, template: string) => string;
 
 export interface Pattern {
+  name?: string;
   urlPatterns: string[];
   fetch: (url: string) => Promise<string>;
   titleSetting: TitleSetting;

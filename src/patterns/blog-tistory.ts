@@ -43,6 +43,6 @@ export const blogTistory: Pattern = {
     callback: (html: string) => html,
   },
   htmlHook: (url, title, properties, content) => {
-    return content;
+    return { title, properties, content };
   },
 };

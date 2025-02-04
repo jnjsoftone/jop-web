@@ -1,43 +1,43 @@
-const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: {
-    main: "./src/main.ts",
-    data: "./src/data.ts",
-  },
+  entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].js",
-    libraryTarget: "commonjs",
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+      "fs": false,
+      "path": false,
+      "os": false,
+      "crypto": false,
+      "stream": false,
+      "http": false,
+      "https": false,
+      "child_process": false,
+      "net": false,
+      "tls": false,
+      "url": false,
+      "zlib": false,
+      "assert": false,
+      "util": false,
+      "buffer": false,
+      "process": false
+    }
   },
   externals: {
-    obsidian: "commonjs2 obsidian",
-  },
-  plugins: [
-    new CopyPlugin({
-      patterns: [{ from: "manifest.json", to: "." }],
-    }),
-    new MiniCssExtractPlugin({
-      filename: "styles.css",
-    }),
-  ],
-  mode: "development",
+    'obsidian': 'commonjs2 obsidian'
+  }
 };
