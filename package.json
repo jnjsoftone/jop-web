@@ -26,5 +26,9 @@
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "jnu-abc": "^0.0.6",
+    "jnu-web": "^0.0.4"
   }
 }

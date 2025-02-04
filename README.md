@@ -18,7 +18,7 @@ cd C:/JnJ/Developments/Utils
 xcli -e init -r "jop-web||jnjsoftone||ts-webpack-obsidianPlugin||Jnjsoft Obsidian Plugin for Web Document Management in Typescript"
 
 # package install
-npm install 
+npm install jnu-abc jnu-web
 ```
 
 ## functions
