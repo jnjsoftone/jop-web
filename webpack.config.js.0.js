@@ -1,7 +1,6 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,7 +11,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     libraryTarget: "commonjs",
-    clean: true
   },
   module: {
     rules: [
@@ -25,14 +23,6 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
-    ],
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-      }),
     ],
   },
   resolve: {
@@ -68,5 +58,4 @@ module.exports = {
     }),
   ],
   mode: "development",
-  target: 'web'
 };
