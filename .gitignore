@@ -1,7 +1,5 @@
 # node
 node_modules/
-dist/
-package.json
 
 # mac
 .DS_Store
