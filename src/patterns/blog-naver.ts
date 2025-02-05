@@ -69,7 +69,7 @@ const blogNaver: Pattern = {
   ],
   contentSetting: {
     selector: "#postListBody",
-    remove: ["script", "style", ".revenue_unit_wrap", ".na_ad"],
+    remove: ["script", "style", ".revenue_unit_wrap", ".na_ad", '[class*="se-oglink"]', '[class*="ssp-adcontent"]'],
     callback: (html: string) => html.replace(/\?type=w\d+_blur/g, "?type=w966"),
   },
   htmlHook: (url, title, properties, content) => {

@@ -99,7 +99,7 @@ const dictFromRoot = ($root: any, settings: any[] = []) => {
     // }
     let value = getValue($root, setting.selector, setting.attribute);
     dict[setting.key] = setting.callback ? setting.callback(value) : value;
-    console.log(`@@@@@ ${setting.key}: ${dict[setting.key]} @@@@`);
+    // console.log(`@@@@@ ${setting.key}: ${dict[setting.key]} @@@@`);
   }
   return dict;
 };
