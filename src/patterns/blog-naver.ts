@@ -1,22 +1,44 @@
 // import { decodeHtmlEntities } from "jnu-doc";
 import { requestUrl } from "obsidian";
 import { today } from "jnu-abc";
-import { decodeHtml } from "jnu-doc";
+import { decodeHtml, Cheer } from "jnu-doc";
 import { Pattern } from "../types";
+import { fetchSimple } from "../utils/fetch";
 
-export const blogTistory: Pattern = {
+const fetchByRedirect = async (url: string) => {
+  const html1 = await fetchSimple(url);
+  const cheer = new Cheer(html1);
+  const iframeSrc = cheer.value("#mainFrame", "src");
+  let redirectUrl = "";
+
+  if (iframeSrc) {
+    try {
+      const url = new URL(iframeSrc.startsWith("//") ? `https:${iframeSrc}` : iframeSrc);
+
+      const blogId = url.searchParams.get("blogId");
+      const logNo = url.searchParams.get("logNo");
+
+      if (blogId && logNo) {
+        redirectUrl = `https://blog.naver.com/PostView.naver?blogId=${blogId}&logNo=${logNo}&redirect=Dlog&widgetTypeCall=true&directAccess=false`;
+      }
+
+      if (!url.href.startsWith("https://blog.naver.com")) {
+        const path = url.pathname + url.search;
+        redirectUrl = `https://blog.naver.com${path}`;
+      }
+    } catch (error) {
+      if (iframeSrc.startsWith("//")) redirectUrl = `https:${iframeSrc}`;
+      if (iframeSrc.startsWith("/")) redirectUrl = `https://blog.naver.com${iframeSrc}`;
+      if (!iframeSrc.startsWith("http")) redirectUrl = `https://blog.naver.com/${iframeSrc}`;
+    }
+  }
+
+  return await fetchSimple(redirectUrl);
+};
+
+export const blogNaver: Pattern = {
   urlPatterns: ["blog.naver.com"],
-  fetch: async (url: string) => {
-    const response = await requestUrl({
-      url,
-      headers: {
-        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "ko-KR,ko;q=0.8,en-US;q=0.5,en;q=0.3",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)",
-      },
-    });
-    return response.text;
-  },
+  fetch: async (url: string) => fetchByRedirect(url),
   titleSetting: {
     selector: "meta[property='og:title']",
     attribute: "content",

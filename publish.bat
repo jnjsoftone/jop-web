@@ -8,8 +8,9 @@ IF "%~1"=="" (
   SET mode=%1
 )
 
-:: set PLUGIN_DIR="{{vault_root}}/.obsidian/plugins/{{name}}"
-set PLUGIN_DIR=D:/Notes/Obsidian/liveSync/dev/.obsidian/plugins/jop-web
+:: set PLUGIN_DIR="{{vault_root}}\.obsidian\plugins\{{name}}"
+set PLUGIN_DIR=D:\Notes\Obsidian\liveSync\dev\.obsidian\plugins\jop-web
+
 
 :: 플러그인 디렉토리가 없으면 생성
 if not exist "%PLUGIN_DIR%" mkdir "%PLUGIN_DIR%"
@@ -38,7 +39,7 @@ git push && git push --tags
 if errorlevel 1 goto :error
 
 :: 6. obsidian 플러그인 배포
-xcopy /E /Y dist/* "%PLUGIN_DIR%/" 
+xcopy /E /Y "dist\*" "%PLUGIN_DIR%\"
 
 goto :success
 
