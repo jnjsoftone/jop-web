@@ -1,10 +1,11 @@
 import { blogTistory } from "./blog-tistory";
-// import { naverPattern } from './blog-naver';
+import { blogNaver } from "./blog-naver";
 // ... 다른 패턴들 import
 import { Pattern } from "../types";
 
 const patterns: Pattern[] = [
   blogTistory,
+  blogNaver,
   // ... 다른 패턴들
 ];
 
