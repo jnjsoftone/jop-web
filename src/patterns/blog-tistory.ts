@@ -45,7 +45,7 @@ export const blogTistory: Pattern = {
     },
   ],
   contentSetting: {
-    selector: ".tt_article_useless_p_margin",
+    selector: "#wrap",
     remove: ["script", "style"],
     callback: (html: string) => html,
   },

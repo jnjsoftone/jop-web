@@ -29,6 +29,7 @@ const fetchData = async (url: string, pattern: Pattern) => {
 
   // 속성 추출
   const properties = cheer.json(pattern.propertySettings ?? []);
+  console.log(`##### properties: ${JSON.stringify(properties)} #####`);
 
   // 내용 추출
   const $content = cheer.find(pattern.contentSetting.selector);
