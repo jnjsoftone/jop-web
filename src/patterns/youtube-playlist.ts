@@ -2,17 +2,17 @@ import { requestUrl } from "obsidian";
 import { fetchSimple, today, decodeHtml } from "../utils";
 import { Pattern } from "../types";
 
-export const webDefault: Pattern = {
-  urlPatterns: ["http"],
+const youtubePlaylist: Pattern = {
+  urlPatterns: ["youtube.com/playlist"],
   fetch: async (url: string) => fetchSimple(url),
   titleSetting: {
-    selector: "title",
-    attribute: "text",
+    selector: "meta[property='og:title']",
+    attribute: "content",
   },
   propertySettings: [
     {
       key: "author",
-      selector: "meta[property='tistory:author']",
+      selector: "meta[name='by']",
       attribute: "content",
     },
     {
@@ -27,7 +27,7 @@ export const webDefault: Pattern = {
     },
     {
       key: "tags",
-      callback: () => ["clipping/web/default"],
+      callback: () => ["clipping/youtube/playlist"],
     },
     {
       key: "clipped",
@@ -42,4 +42,8 @@ export const webDefault: Pattern = {
   htmlHook: (url, title, properties, content) => {
     return { title, properties, content };
   },
+};
+
+export {
+  youtubePlaylist,
 };
