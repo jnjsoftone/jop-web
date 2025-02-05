@@ -1,5 +1,5 @@
-import { mdContent, mdFrontmatter } from 'jnu-doc';
-import type { Pattern } from '../types';
+import { mdContent, mdFrontmatter } from "../utils";
+import type { Pattern } from "../types";
 
 const makeMarkdown = (url: string, title: string, properties: any, content: string, pattern: Pattern) => {
   let frontmatter = mdFrontmatter(properties);
@@ -8,8 +8,8 @@ const makeMarkdown = (url: string, title: string, properties: any, content: stri
   }
 
   let _content = mdContent(content);
-  const template = '';
-  let result = '';
+  const template = "";
+  let result = "";
   if (pattern.makeMdContent) {
     _content = pattern.makeMdContent(url, title, properties, content, template);
   }
@@ -23,6 +23,4 @@ const makeMarkdown = (url: string, title: string, properties: any, content: stri
   return result;
 };
 
-
 export { makeMarkdown };
-

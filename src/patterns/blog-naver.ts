@@ -1,7 +1,5 @@
-// import { decodeHtmlEntities } from "jnu-doc";
 import { requestUrl } from "obsidian";
-import { today } from "jnu-abc";
-import { decodeHtml, Cheer } from "jnu-doc";
+import { today, decodeHtml, Cheer } from "../utils";
 import { Pattern } from "../types";
 import { fetchSimple } from "../utils/fetch";
 

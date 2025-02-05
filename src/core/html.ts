@@ -1,14 +1,12 @@
 // import { requestUrl, TFile, Vault } from 'obsidian';
-import { requestUrl } from 'obsidian';
+import { requestUrl } from "obsidian";
 import { findPattern } from "../patterns";
-import { sanitizeName } from "jnu-abc";
-import { Cheer } from "jnu-doc";
+import { sanitizeName, Cheer } from "../utils";
 import { Pattern } from "../types";
 
 const fetchData = async (url: string, pattern: Pattern) => {
-
   if (!pattern) {
-    throw new Error('패턴을 찾을 수 없습니다');
+    throw new Error("패턴을 찾을 수 없습니다");
   }
 
   const html = await pattern.fetch(url);
@@ -16,7 +14,7 @@ const fetchData = async (url: string, pattern: Pattern) => {
 
   // 선택자 유효성 검사
   if (!pattern.titleSetting?.selector || !pattern.contentSetting?.selector) {
-    throw new Error('필수 선택자가 없습니다');
+    throw new Error("필수 선택자가 없습니다");
   }
 
   // 제목 추출
@@ -32,7 +30,7 @@ const fetchData = async (url: string, pattern: Pattern) => {
   // 내용 추출
   const $content = cheer.find(pattern.contentSetting.selector);
   if (!$content.length) {
-    throw new Error('내용을 찾을 수 없습니다');
+    throw new Error("내용을 찾을 수 없습니다");
   }
 
   if (pattern.contentSetting.remove) {

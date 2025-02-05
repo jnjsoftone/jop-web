@@ -6,7 +6,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
   entry: {
     main: "./src/main.ts",
-    data: "./src/data.ts",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -18,7 +17,14 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
         exclude: /node_modules/,
       },
       {
@@ -32,11 +38,13 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
       }),
     ],
-    splitChunks: {
-      chunks: "all",
-    },
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -44,24 +52,16 @@ module.exports = {
     fallback: {
       fs: false,
       path: require.resolve("path-browserify"),
+      stream: require.resolve("stream-browserify"),
+      child_process: false,
+      util: false,
       os: false,
       crypto: false,
-      stream: require.resolve("stream-browserify"),
-      http: false,
-      https: false,
-      child_process: false,
-      net: false,
-      tls: false,
-      url: false,
-      zlib: false,
-      assert: false,
-      util: false,
-      buffer: false,
-      process: false,
     },
   },
   externals: {
     obsidian: "commonjs2 obsidian",
+    child_process: "commonjs child_process", // Node.js 모듈을 외부 의존성으로 처리
   },
   plugins: [
     new CopyPlugin({
