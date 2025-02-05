@@ -38,8 +38,9 @@ const fetchData = async (url: string, pattern: Pattern) => {
   }
 
   if (pattern.contentSetting.remove) {
-    for (const remove of pattern.contentSetting.remove) {
-      $content.remove(remove);
+    for (const _remove of pattern.contentSetting.remove) {
+      console.log(`##### _remove: ${_remove} #####`);
+      $content.remove(_remove);
     }
   }
   let content = cheer.html($content);
