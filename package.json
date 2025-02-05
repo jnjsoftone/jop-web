@@ -1,6 +1,6 @@
 {
   "name": "jop-web",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Web page clipper for Obsidian",
   "main": "dist/main.js",
   "scripts": {
