@@ -5,7 +5,7 @@ import { decodeHtml } from "jnu-doc";
 import { Pattern } from "../types";
 
 export const blogTistory: Pattern = {
-  urlPatterns: ["tistory.com"],
+  urlPatterns: ["blog.naver.com"],
   fetch: async (url: string) => {
     const response = await requestUrl({
       url,
@@ -24,22 +24,23 @@ export const blogTistory: Pattern = {
   propertySettings: [
     {
       key: "author",
-      selector: "meta[property='tistory:author']",
+      selector: "meta[property='naverblog:nickname']",
       attribute: "content",
     },
     {
       key: "published",
-      selector: "meta[property='article:published_time']",
-      attribute: "content",
+      selector: ".date",
+      attribute: "text",
     },
     {
       key: "description",
       selector: "meta[property='og:description']",
       attribute: "content",
+      callback: (v: string) => decodeHtml(v),
     },
     {
       key: "tags",
-      callback: () => ["clipping/blog/tistory"],
+      callback: () => ["clipping/blog/naver"],
     },
     {
       key: "clipped",
@@ -47,9 +48,9 @@ export const blogTistory: Pattern = {
     },
   ],
   contentSetting: {
-    selector: ".tt_article_useless_p_margin",
+    selector: "#postListBody",
     remove: ["script", "style"],
-    callback: (html: string) => decodeHtml(html),
+    callback: (html: string) => html,
   },
   htmlHook: (url, title, properties, content) => {
     return { title, properties, content };

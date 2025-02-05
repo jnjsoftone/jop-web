@@ -20,8 +20,6 @@ git pull
 if errorlevel 1 goto :error
 
 REM 2. 빌드
-call yarn clean:win
-if errorlevel 1 goto :error
 call yarn build
 if errorlevel 1 goto :error
 
