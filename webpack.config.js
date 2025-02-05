@@ -6,7 +6,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
   entry: {
     main: "./src/main.ts",
-    data: "./src/data.ts",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -23,6 +22,9 @@ module.exports = {
             loader: "ts-loader",
             options: {
               transpileOnly: true,
+              compilerOptions: {
+                module: "esnext",
+              },
             },
           },
         ],
@@ -43,6 +45,10 @@ module.exports = {
           format: {
             comments: false,
           },
+          mangle: {
+            keep_classnames: true,
+            keep_fnames: true,
+          },
         },
       }),
     ],
@@ -62,7 +68,6 @@ module.exports = {
   },
   externals: {
     obsidian: "commonjs2 obsidian",
-    child_process: "commonjs child_process", // Node.js 모듈을 외부 의존성으로 처리
   },
   plugins: [
     new CopyPlugin({
