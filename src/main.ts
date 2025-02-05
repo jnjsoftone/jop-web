@@ -3,32 +3,38 @@ import { fetchData } from "./core/html";
 import { makeMarkdown } from "./core/markdown";
 import { findPattern } from "./patterns";
 
+const getMarkdown = async (url: string) : Promise<any> => {
+  if (!url.startsWith("http")) {
+    return {title: '', markdown: '', error: '클립보드에 유효한 URL이 없습니다.'};
+  }
+  // 패턴 찾기
+  const pattern = findPattern(url);
+  console.log(JSON.stringify(pattern, null, 2));
+  if (!pattern) {
+    return {title: '', markdown: '', error: "지원하지 않는 URL 형식입니다."};
+  }
+
+  // URL에서 데이터 추출
+  const { title, properties, content } = await fetchData(url, pattern);
+  // console.log(JSON.stringify({ title, properties, content }, null, 2));
+
+  // 마크다운 생성
+  const markdown = makeMarkdown(url, title, properties, content, pattern);
+
+  return {title, markdown, error: null};
+}
+
 export default class JopWebPlugin extends Plugin {
   async onload() {
     // 리본 아이콘 추가
     this.addRibbonIcon("clipboard-list", "URL to Markdown", async () => {
       try {
         const url = await navigator.clipboard.readText();
-        // console.log(`url: ${url}`);
-        if (!url.startsWith("http")) {
-          new Notice("클립보드에 유효한 URL이 없습니다.");
+        const { title, markdown, error } = await getMarkdown(url);
+        if (error) {
+          new Notice(error);
           return;
         }
-        // 패턴 찾기
-        const pattern = findPattern(url);
-        console.log(JSON.stringify(pattern, null, 2));
-        if (!pattern) {
-          new Notice("지원하지 않는 URL 형식입니다.");
-          return;
-        }
-
-        // URL에서 데이터 추출
-        const { title, properties, content } = await fetchData(url, pattern);
-        // console.log(JSON.stringify({ title, properties, content }, null, 2));
-
-        // 마크다운 생성
-        const markdown = makeMarkdown(url, title, properties, content, pattern);
-        // console.log(markdown);
         // 파일 생성
         const fileName = `${title}.md`;
         const existingFile = this.app.vault.getAbstractFileByPath(fileName);

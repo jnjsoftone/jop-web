@@ -1,7 +1,7 @@
 // import { requestUrl, TFile, Vault } from 'obsidian';
 import { requestUrl } from "obsidian";
 import { findPattern } from "../patterns";
-import { sanitizeName, Cheer } from "../utils";
+import { fetchSimple, sanitizeName, Cheer } from "../utils";
 import { Pattern } from "../types";
 
 const fetchData = async (url: string, pattern: Pattern) => {
@@ -9,8 +9,9 @@ const fetchData = async (url: string, pattern: Pattern) => {
     throw new Error("패턴을 찾을 수 없습니다");
   }
 
-  const html = await pattern.fetch(url);
-  console.log(`##### url: ${url} ##### html: ${html}`);
+  let html = pattern.fetch ? await pattern.fetch(url) : await fetchSimple(url);
+
+  // console.log(`##### url: ${url} ##### html: ${html}`);
   let cheer = new Cheer(html);
 
   // 선택자 유효성 검사
