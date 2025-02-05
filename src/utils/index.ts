@@ -9,7 +9,7 @@ export {
   formatVariables,
   makeUrlAbsolute,
   formatDuration,
-} from "./html";
+} from "./string";
 export { Cheer } from "./cheer";
 export { fetchSimple } from "./fetch";
 export { today, dateKo, sleep } from "./basic";

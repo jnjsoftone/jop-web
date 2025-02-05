@@ -1,6 +1,6 @@
 import TurndownService from "turndown";
 import { sanitizeName } from "./builtin";
-import { escapeDoubleQuotes } from "./html";
+import { escapeDoubleQuotes } from "./string";
 
 const DEFAULT_CONFIG = {
   headingStyle: "atx",
