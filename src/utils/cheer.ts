@@ -94,9 +94,9 @@ const getValuesFromStr = (str: string, selector: string, attribute?: string) => 
 const dictFromRoot = ($root: any, settings: any[] = []) => {
   let dict: any = {};
   for (let setting of settings) {
-    if (!setting.selector) {
-      continue;
-    }
+    // if (!setting.selector) {
+    //   continue;
+    // }
     let value = getValue($root, setting.selector, setting.attribute);
     dict[setting.key] = setting.callback ? setting.callback(value) : value;
     console.log(`@@@@@ dict[${setting.key}]: ${dict[setting.key]} @@@@`);
