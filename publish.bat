@@ -32,15 +32,21 @@ if errorlevel 1 goto :error
 git commit -m "chore: build for publish"
 if errorlevel 1 goto :error
 
-REM 5. npm 버전 업데이트 (이때 자동으로 버전 태그가 생성됨)
+REM 5. 기존 태그 삭제
+for /f "tokens=*" %%i in ('npm pkg get version') do set version=%%i
+set version=%version:"=%
+git tag -d v%version% 2>nul
+git push origin :refs/tags/v%version% 2>nul
+
+REM 6. npm 버전 업데이트 (이때 자동으로 버전 태그가 생성됨)
 call npm version %mode%
 if errorlevel 1 goto :error
 
-REM 6. git push
+REM 7. git push
 git push && git push --tags
 if errorlevel 1 goto :error
 
-:: 7. obsidian 플러그인 배포
+:: 8. obsidian 플러그인 배포
 del /Q "%PLUGIN_DIR%\*"
 xcopy /E /Y "dist\*" "%PLUGIN_DIR%\"
 
