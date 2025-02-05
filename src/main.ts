@@ -6,15 +6,14 @@ import { findPattern } from "./patterns";
 export default class JopWebPlugin extends Plugin {
   async onload() {
     // 리본 아이콘 추가
-    this.addRibbonIcon("clipboard-list", "URL to Markdown", async () => {
+    this.addRibbonIcon("clipboard-list", "클립보드(URL) to Markdown", async () => {
       try {
         const url = await navigator.clipboard.readText();
+        console.log(`url: ${url}`);
         if (!url.startsWith("http")) {
           new Notice("클립보드에 유효한 URL이 없습니다.");
           return;
         }
-
-        console.log(`url: ${url}`);
 
         // 패턴 찾기
         const pattern = await findPattern(url);
