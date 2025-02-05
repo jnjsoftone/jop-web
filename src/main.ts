@@ -9,7 +9,7 @@ export default class JopWebPlugin extends Plugin {
     this.addRibbonIcon("clipboard-list", "URL to Markdown", async () => {
       try {
         const url = await navigator.clipboard.readText();
-        console.log(`url: ${url}`);
+        // console.log(`url: ${url}`);
         if (!url.startsWith("http")) {
           new Notice("클립보드에 유효한 URL이 없습니다.");
           return;
@@ -24,11 +24,11 @@ export default class JopWebPlugin extends Plugin {
 
         // URL에서 데이터 추출
         const { title, properties, content } = await fetchData(url, pattern);
-        console.log(JSON.stringify({ title, properties, content }, null, 2));
+        // console.log(JSON.stringify({ title, properties, content }, null, 2));
 
         // 마크다운 생성
         const markdown = makeMarkdown(url, title, properties, content, pattern);
-        console.log(markdown);
+        // console.log(markdown);
         // 파일 생성
         const fileName = `${title}.md`;
         const existingFile = this.app.vault.getAbstractFileByPath(fileName);

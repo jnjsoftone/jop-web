@@ -25,11 +25,11 @@ const fetchData = async (url: string, pattern: Pattern) => {
   }
   title = pattern.titleSetting.sanitize ? pattern.titleSetting.sanitize(title) : sanitizeName(title);
 
-  console.log(`##### title: ${title} #####`);
+  // console.log(`##### title: ${title} #####`);
 
   // 속성 추출
   const properties = cheer.json(pattern.propertySettings ?? []);
-  console.log(`##### properties: ${JSON.stringify(properties)} #####`);
+  // console.log(`##### properties: ${JSON.stringify(properties)} #####`);
 
   // 내용 추출
   const $content = cheer.find(pattern.contentSetting.selector);
