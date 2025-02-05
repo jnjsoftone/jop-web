@@ -45,7 +45,7 @@ const fetchData = async (url: string, pattern: Pattern) => {
       cheer.del(_remove);
     }
   }
-  content = cheer.html("");
+  content = cheer.html();
   if (pattern.contentSetting.callback) {
     content = pattern.contentSetting.callback(content);
   }

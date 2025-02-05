@@ -215,7 +215,7 @@ class Cheer {
     return getValues(this.$, selector, attribute);
   }
 
-  html(selector: string) {
+  html(selector?: string) {
     return getHtml(this.$, selector);
   }
 
