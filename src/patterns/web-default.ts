@@ -22,7 +22,7 @@ export const webDefault: Pattern = {
     },
     {
       key: "description",
-      selector: "meta[property='og:description']",
+      selector: "meta[name='description']",
       attribute: "content",
     },
     {
