@@ -9,6 +9,7 @@ export default class JopWebPlugin extends Plugin {
     this.addRibbonIcon("clipboard-list", "URL to Markdown", async () => {
       try {
         const url = await navigator.clipboard.readText();
+        console.log(`url: ${url}`);
         if (!url.startsWith("http")) {
           new Notice("클립보드에 유효한 URL이 없습니다.");
           return;

@@ -47,7 +47,7 @@ export const blogTistory: Pattern = {
   contentSetting: {
     selector: ".tt_article_useless_p_margin",
     remove: ["script", "style"],
-    callback: (html: string) => decodeHtml(html),
+    callback: (html: string) => html,
   },
   htmlHook: (url, title, properties, content) => {
     return { title, properties, content };

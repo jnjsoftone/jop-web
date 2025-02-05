@@ -10,6 +10,7 @@ const fetchData = async (url: string, pattern: Pattern) => {
   }
 
   const html = await pattern.fetch(url);
+  console.log(`##### url: ${url} ##### html: ${html}`);
   const cheer = new Cheer(html);
 
   // 선택자 유효성 검사
@@ -23,6 +24,8 @@ const fetchData = async (url: string, pattern: Pattern) => {
     title = pattern.titleSetting.callback(title);
   }
   title = pattern.titleSetting.sanitize ? pattern.titleSetting.sanitize(title) : sanitizeName(title);
+
+  console.log(`##### title: ${title} #####`);
 
   // 속성 추출
   const properties = cheer.json(pattern.propertySettings ?? []);
