@@ -1,7 +1,7 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -12,7 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     libraryTarget: "commonjs",
-    clean: true
+    clean: true,
   },
   module: {
     rules: [
@@ -34,27 +34,31 @@ module.exports = {
         extractComments: false,
       }),
     ],
+    splitChunks: {
+      chunks: "all",
+    },
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
+    modules: ["node_modules"],
     fallback: {
-      "fs": false,
-      "path": require.resolve("path-browserify"),
-      "os": false,
-      "crypto": false,
-      "stream": require.resolve("stream-browserify"),
-      "http": false,
-      "https": false,
-      "child_process": false,
-      "net": false,
-      "tls": false,
-      "url": false,
-      "zlib": false,
-      "assert": false,
-      "util": false,
-      "buffer": false,
-      "process": false
-    }
+      fs: false,
+      path: require.resolve("path-browserify"),
+      os: false,
+      crypto: false,
+      stream: require.resolve("stream-browserify"),
+      http: false,
+      https: false,
+      child_process: false,
+      net: false,
+      tls: false,
+      url: false,
+      zlib: false,
+      assert: false,
+      util: false,
+      buffer: false,
+      process: false,
+    },
   },
   externals: {
     obsidian: "commonjs2 obsidian",
@@ -67,6 +71,6 @@ module.exports = {
       filename: "styles.css",
     }),
   ],
-  mode: "development",
-  target: 'web'
+  mode: "production",
+  target: "web",
 };
