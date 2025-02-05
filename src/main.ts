@@ -14,12 +14,16 @@ export default class JopWebPlugin extends Plugin {
           return;
         }
 
+        console.log(`url: ${url}`);
+
         // 패턴 찾기
         const pattern = await findPattern(url);
         if (!pattern) {
           new Notice("지원하지 않는 URL 형식입니다.");
           return;
         }
+
+        console.log(`pattern: ${JSON.stringify(pattern)}`);
 
         // URL에서 데이터 추출
         const data = await fetchData(url, pattern);
@@ -28,11 +32,14 @@ export default class JopWebPlugin extends Plugin {
           return;
         }
 
+        console.log(`data: ${JSON.stringify(data)}`);
+
         const { title, properties, content } = data;
 
         // 마크다운 생성
         const markdown = makeMarkdown(url, title, properties, content, pattern);
 
+        console.log(`markdown: ${markdown}`);
         // 파일 생성
         const fileName = `${title}.md`;
         const existingFile = this.app.vault.getAbstractFileByPath(fileName);
