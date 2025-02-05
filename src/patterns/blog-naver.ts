@@ -60,17 +60,17 @@ const blogNaver: Pattern = {
     },
     {
       key: "tags",
-      callback: () => ["clipping/blog/naver"],
+      callback: (v: string) => ["clipping/blog/naver"],
     },
     {
       key: "clipped",
-      callback: () => today(),
+      callback: (v: string) => today(),
     },
   ],
   contentSetting: {
     selector: "#postListBody",
-    remove: ["script", "style"],
-    callback: (html: string) => html,
+    remove: ["script", "style", ".revenue_unit_wrap", ".na_ad"],
+    callback: (html: string) => html.replace(/\?type=w\d+_blur/g, "?type=w966"),
   },
   htmlHook: (url, title, properties, content) => {
     return { title, properties, content };
