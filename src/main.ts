@@ -6,39 +6,28 @@ import { findPattern } from "./patterns";
 export default class JopWebPlugin extends Plugin {
   async onload() {
     // 리본 아이콘 추가
-    this.addRibbonIcon("clipboard-list", "클립보드(URL) to Markdown", async () => {
+    this.addRibbonIcon("clipboard-list", "URL to Markdown", async () => {
       try {
         const url = await navigator.clipboard.readText();
-        console.log(`url: ${url}`);
         if (!url.startsWith("http")) {
           new Notice("클립보드에 유효한 URL이 없습니다.");
           return;
         }
-
         // 패턴 찾기
-        const pattern = await findPattern(url);
+        const pattern = findPattern(url);
+        console.log(JSON.stringify(pattern, null, 2));
         if (!pattern) {
           new Notice("지원하지 않는 URL 형식입니다.");
           return;
         }
 
-        console.log(`pattern: ${JSON.stringify(pattern)}`);
-
         // URL에서 데이터 추출
-        const data = await fetchData(url, pattern);
-        if (!data) {
-          new Notice("데이터를 추출할 수 없습니다.");
-          return;
-        }
-
-        console.log(`data: ${JSON.stringify(data)}`);
-
-        const { title, properties, content } = data;
+        const { title, properties, content } = await fetchData(url, pattern);
+        console.log(JSON.stringify({ title, properties, content }, null, 2));
 
         // 마크다운 생성
         const markdown = makeMarkdown(url, title, properties, content, pattern);
-
-        console.log(`markdown: ${markdown}`);
+        console.log(markdown);
         // 파일 생성
         const fileName = `${title}.md`;
         const existingFile = this.app.vault.getAbstractFileByPath(fileName);
@@ -64,9 +53,11 @@ export default class JopWebPlugin extends Plugin {
       id: "url-to-markdown",
       name: "URL을 마크다운으로 변환",
       callback: async () => {
+        // 리본 아이콘과 동일한 동작
         const icon = this.app.workspace.containerEl.querySelector(".ribbon-url-to-markdown");
         if (icon) {
-          (icon as HTMLElement).click();
+          // @ts-ignore
+          icon.click();
         }
       },
     });
